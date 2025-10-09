@@ -126,5 +126,12 @@ int main(){
     cout << a << endl << b;*/
 
     //17
+    /*int a {};
+    int b {};
+
+    cin >> a >> b;
+
+    std :: cout << std :: min(a , b) << " is the smallest num";*/
+
     
 }
