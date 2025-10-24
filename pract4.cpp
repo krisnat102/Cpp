@@ -123,7 +123,24 @@ int concat(int first, int second){
     return first + second;
 }
 
-int gcdOfRow(int n){
+int gcdOfRow(unsigned n){
+    if (n < 2) return -1;
+
+    int input1, input2;
+
+    bool tracker = false;
+
+    std::cin >> input1 >> input2;
+
+    int gcdKeeper = 0;
+
+    for (int i = 0; i < n; i++)
+    {
+        if (tracker) std::cin >> input1;
+        else std::cin >> input2;
+        
+        tracker = !tracker;
+    }
     
 }
 
