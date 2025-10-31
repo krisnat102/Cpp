@@ -147,5 +147,5 @@ int gcdOfRow(unsigned n){
 int main(){
     int input1, input2;
     std::cin >> input1 >> input2;
-    std::cout << concat(input1, input2);
+    std::cout << gcd(input1, input2);
 }
