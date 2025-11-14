@@ -68,7 +68,7 @@ unsigned getSymbolFromValue(unsigned n)
 unsigned convertFromKToDecimal(const char num[], size_t size, unsigned k)
 {
     unsigned res = 0;
-    unsigned mult = 0;
+    unsigned mult = 1;
 
     for (int i = size - 1; i >= 0; i--) 
     {
@@ -105,7 +105,8 @@ void printArr(const char arr[], size_t size)
 
 int main()
 {
-    const char num[] = { '1', '1', '1', '1', '1'};
-    char res[2];
-    convertFromBaseKToBaseP(num, 5, 2, res, 2, 16);
+    const char num[] = { '5', '2', '6'};
+    char res[3];
+    convertFromBaseKToBaseP(num, 3, 8, res, 3, 10);
+    printArr(res, 3);
 }
