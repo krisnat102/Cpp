@@ -2,11 +2,13 @@
 
 const unsigned DIGIT_COUNT = 4;
 
-bool isValidNum(int n){
-
+bool isValidNum(int n)
+{
+    
 }
 
-unsigned userInput(){
+unsigned userInput()
+{
     unsigned n;
     do{
         std::cin >> n;
@@ -14,6 +16,7 @@ unsigned userInput(){
     while (isValidNum(n));
 }
 
-int main(){
+int main()
+{
 
 }

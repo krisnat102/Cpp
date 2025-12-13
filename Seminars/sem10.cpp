@@ -6,7 +6,7 @@ size_t const PLAYER_COUNT = 2;
 size_t const LINE_LENGTH = 3;
 const char EMPTY = ' ';
 
-void initBoard(char board[][BOARD_SIZE], char sym) 
+void initBoard(char board[][BOARD_SIZE], char sym)
 {
 	for (size_t i = 0; i < BOARD_SIZE; i++)
 	{
