@@ -108,7 +108,7 @@ int getWordCount(const char* str, char c)
     return counter;
 }
 
-char** initMatrix(const char* str, char c)
+char** initWordsMatrix(const char* str, char c)
 {
     int wordCount = getWordCount(str, c);
     char** matrix = new char*[wordCount];
@@ -125,7 +125,7 @@ char** initMatrix(const char* str, char c)
 
 char** splitWord(const char* str, char c)
 {
-    char** matrix = initMatrix(str, c);
+    char** matrix = initWordsMatrix(str, c);
 
     int get = 0;
     int putRow = 0;
@@ -150,4 +150,202 @@ char** splitWord(const char* str, char c)
 
     return matrix;
 }
+
+void printArr(const int* arr, size_t length)
+{
+    for (size_t i = 0; i < length; i++)
+    {
+        std::cout << arr[i] << ' ';
+    }
+    
+}
+
+void insertAt(int*& arr, size_t length, int index, int element) //5
+{
+    if (index > (length + 1)) return;
+
+    int* temp = new int[length + 1];
+
+    for (size_t i = 0; i <= length; i++)
+    {
+        if (i == index)
+        {
+            temp[i] = element;
+            i++;
+        }
+        temp[i] = *arr;
+        arr++;
+    }
+    arr = new int[length + 1];
+
+    for (size_t i = 0; i <= length; i++)
+    {
+        arr[i] = temp[i];
+    }
+
+    delete[] temp;
+}
+
+void removeAt(int*& arr, size_t length, int index)
+{
+    if (index > length) return;
+
+    int* temp = new int[length - 1];
+
+    for (size_t i = 0; i < length; i++)
+    {
+        if (i == index)
+        {
+            arr++;
+        }
+        
+        temp[i] = *arr;
+        arr++;
+    }
+    arr = new int[length];
+
+    for (size_t i = 0; i < length; i++)
+    {
+        arr[i] = temp[i];
+    }
+
+    delete[] temp;
+}
+
+#pragma region 6
+int getNumLength(int i)
+{
+    int counter = 0;
+
+    while (i > 0)
+    {
+        i /= 10;
+        counter++;
+    }
+
+    return counter;
+}
+
+int tenToPow(int i)
+{
+    int res = 1;
+    while (i > 0)
+    {
+        res *= 10;
+        i--;
+    }
+
+    return res;
+}
+
+bool compareLex(size_t i, size_t j)
+{
+    if (i == 0 && j == 0) return true;
+    int iLen = getNumLength(i), jLen = getNumLength(j), iPow = tenToPow(iLen - 1), jPow = tenToPow(jLen - 1), iFirstNum = (i - i % iPow) / iPow, jFirstNum = (j - j % jPow) / jPow;
+    if (iFirstNum == jFirstNum) return compareLex(i%iPow, j%jPow);
+    else return iFirstNum < jFirstNum;
+}
+
+void swap(size_t& i, size_t& j)
+{
+    size_t temp = i;
+    i = j;
+    j = temp;
+}
+
+void printArr(const size_t* arr, size_t length)
+{
+    for (size_t i = 0; i < length; i++)
+    {
+        std::cout << arr[i] << ' ';
+    }
+    
+}
+
+size_t* sortLex(size_t* nums, size_t count) //6
+{
+    for (size_t i = 0; i < count - 1; i++)
+    {
+        for (size_t j = 0; j < count - i - 1; j++)
+        {
+            if (!compareLex(nums[j], nums[j + 1]))
+            {
+                swap(nums[j], nums[j + 1]);
+            }
+        }
+    }
+
+    return nums;
+}
+#pragma endregion
+
+#pragma region matrix
+int** initMatrix(size_t rows, size_t cols)
+{
+    int** subarrays = new int*[rows];
+
+    for (size_t i = 0; i < rows; i++)
+    {
+        subarrays[i] = new int[cols];
+    }
+
+    return subarrays;
+}
+
+int** transposeMatrix(int** matrix, size_t rows, size_t cols) //1
+{
+    int** trans = initMatrix(cols, rows);
+    
+    for (size_t i = 0; i < rows; i++)
+    {
+        for (size_t j = 0; j < cols; j++)
+        {
+            trans[j][i] = matrix[i][j];
+        }
+    }
+    
+    return trans;
+}
+
+size_t* initNegativeCounter(size_t size)
+{
+    size_t* arr = new size_t[size];
+
+    for (size_t i = 0; i < size; i++)
+    {
+        arr[i] = 0;
+    }
+    
+    return arr;
+}
+
+size_t* getNegativeNumCount(int** matrix, size_t rows, size_t cols) //3
+{
+    size_t* negativeCounter = initNegativeCounter(rows);
+
+    for (size_t i = 0; i < rows; i++)
+    {
+        for (size_t j = 0; j < cols; j++)
+        {
+            if (matrix[i][j] < 0) negativeCounter[i]++;
+        }
+    }
+    
+    return negativeCounter;
+}
+
+bool areMatrixesTheSame(const int** first, const int** second, size_t rows, size_t cols)
+{
+    for (size_t i = 0; i < rows; i++)
+    {
+        for (size_t j = 0; j < cols; j++)
+        {
+            if (first[i][j] != second[i][j]) return false;
+        }
+    }
+
+    return true;
+}
+#pragma endregion
+
 
